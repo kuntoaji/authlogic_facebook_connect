@@ -48,15 +48,6 @@ module AuthlogicFacebookConnect
       end
       alias_method :facebook_session_key_field=, :facebook_session_key_field
 
-      # Class representing facebook users we want to authenticate against
-      #
-      # * <tt>Default:</tt> klass
-      # * <tt>Accepts:</tt> Class
-      def facebook_user_class(value = nil)
-        rw_config(:facebook_user_class, value, klass)
-      end
-      alias_method :facebook_user_class=, :facebook_user_class
-
       # Should a new user creation be skipped if there is no user with given facebook uid?
       #
       # The default behavior is not to skip (hence create new user). You may want to turn it on
@@ -85,7 +76,7 @@ module AuthlogicFacebookConnect
 
       def validate_by_facebook_connect
         facebook_session = controller.facebook_session
-        self.attempted_record = facebook_user_class.find(:first, :conditions => { facebook_uid_field => facebook_session.user.uid })
+        self.attempted_record = klass.find(:first, :conditions => { facebook_uid_field => facebook_session.user.uid })
 
         if self.attempted_record
           self.attempted_record.send(:"#{facebook_session_key_field}=", facebook_session.session_key)
@@ -100,12 +91,8 @@ module AuthlogicFacebookConnect
 
             new_user = klass.new
 
-            if klass == facebook_user_class
-              new_user.send(:"#{facebook_uid_field}=", facebook_session.user.uid)
-              new_user.send(:"#{facebook_session_key_field}=", facebook_session.session_key)
-            else
-              new_user.send(:"build_#{facebook_user_class.to_s.underscore}", :"#{facebook_uid_field}" => facebook_session.user.uid, :"#{facebook_session_key_field}" => facebook_session.session_key)
-            end
+            new_user.send(:"#{facebook_uid_field}=", facebook_session.user.uid)
+            new_user.send(:"#{facebook_session_key_field}=", facebook_session.session_key)
 
             new_user.before_connect(facebook_session) if new_user.respond_to?(:before_connect)
 
@@ -144,10 +131,6 @@ module AuthlogicFacebookConnect
 
       def facebook_session_key_field
         self.class.facebook_session_key_field
-      end
-
-      def facebook_user_class
-        self.class.facebook_user_class
       end
 
       def facebook_skip_new_user_creation
