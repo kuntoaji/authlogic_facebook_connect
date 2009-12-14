@@ -90,9 +90,7 @@ module AuthlogicFacebookConnect
         if self.attempted_record
           self.attempted_record.send(:"#{facebook_session_key_field}=", facebook_session.session_key)
           self.attempted_record.save
-        end
-
-        unless self.attempted_record || facebook_skip_new_user_creation
+        elsif facebook_skip_new_user_creation == false
           begin
             # Get the user from facebook and create a local user.
             #
