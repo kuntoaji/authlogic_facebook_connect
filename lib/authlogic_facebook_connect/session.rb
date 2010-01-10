@@ -116,6 +116,7 @@ module AuthlogicFacebookConnect
       end
 
       def authenticating_with_facebook_connect?
+        return false unless controller.respond_to?(:set_facebook_session)
         controller.set_facebook_session
         attempted_record.nil? && errors.empty? && controller.facebook_session
       end
