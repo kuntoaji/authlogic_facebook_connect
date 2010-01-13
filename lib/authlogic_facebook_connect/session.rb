@@ -51,7 +51,7 @@ module AuthlogicFacebookConnect
       #
       # * <tt>Default:</tt> [:find_by_facebook_uid, :build_new_user]
       # * <tt>Accepts:</tt> Array
-      def facebook_application_user_vivify_chain(value = [])
+      def facebook_application_user_vivify_chain(value = nil)
         rw_config(:facebook_application_user_vivify_chain, value, [:find_by_facebook_uid, :build_new_user])
       end
       alias_method :facebook_application_user_vivify_chain=, :facebook_application_user_vivify_chain
@@ -82,7 +82,7 @@ module AuthlogicFacebookConnect
         # existed or one that is brand new, keep processing
         unless self.attempted_record.nil?
           # set the session key into the user account
-          self.attempted_record.send("#{facebook_session_key_field}=", facebook_session.session_key)
+          self.attempted_record.send("#{facebook_session_key_field}=", facebook_session.session_key) if self.attempted_record.respond_to?("#{facebook_session_key_field}=")
 
           # call either before or during connect callback based on the
           # state of the application user
