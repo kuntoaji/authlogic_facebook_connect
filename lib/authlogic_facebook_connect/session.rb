@@ -119,6 +119,10 @@ module AuthlogicFacebookConnect
         self.class.facebook_user_class
       end
 
+      def facebook_application_user_vivify_chain
+        self.class.facebook_application_user_vivify_chain
+      end
+
       def find_by_facebook_uid(facebook_session)
         facebook_user_class.find(:first, :conditions => { facebook_uid_field => facebook_session.user.uid })
       end
