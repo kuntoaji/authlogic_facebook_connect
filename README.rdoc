@@ -151,57 +151,37 @@ For more information about what you can get form the facebook_session checkout t
 ==== Testing with cucumber
 If you want to test with cucumber, you have to add cucumber environtment in the facebooker.yml. Example:
 
-development:
-  api_key: YOUR API KEY
-  secret_key: YOUR SECRET KEY
-  canvas_page_name: Bukalapak
-  callback_url:
-  pretty_errors: true
-  set_asset_host_to_callback_url: true
-  tunnel:
-    public_host_username: 
-    public_host: 
-    public_port: 4007
-    local_port: 3000
-    server_alive_interval: 0
+  development:
+    api_key: YOUR API KEY
+    secret_key: YOUR SECRET KEY
+    canvas_page_name: Bukalapak
+    callback_url:
+    pretty_errors: true
+    set_asset_host_to_callback_url: true
+    #......
 
-test:
-  api_key: YOUR API KEY
-  secret_key: YOUR SECRET KEY
-  canvas_page_name:
-  callback_url:
-  set_asset_host_to_callback_url: true
-  tunnel:
-    public_host_username: 
-    public_host: 
-    public_port: 4007
-    local_port: 3000
-    server_alive_interval: 0
+  test:
+    api_key: YOUR API KEY
+    secret_key: YOUR SECRET KEY
+    canvas_page_name:
+    callback_url:
+    set_asset_host_to_callback_url: true
+    #......
 
-production:
-  api_key: YOUR API KEY
-  secret_key: YOUR SECRET KEY
-  canvas_page_name:
-  callback_url: 
-  set_asset_host_to_callback_url: true   
-  tunnel:
-    public_host_username: 
-    public_host: 
-    public_port: 4007
-    local_port: 3000
-    server_alive_interval: 0
+  production:
+    api_key: YOUR API KEY
+    secret_key: YOUR SECRET KEY
+    canvas_page_name:
+    callback_url: 
+    set_asset_host_to_callback_url: true   
+    #......
 
-cucumber:
-  api_key: YOUR API KEY
-  secret_key: YOUR SECRET KEY
-  canvas_page_name:
-  callback_url: 
-  set_asset_host_to_callback_url: true   
-  tunnel:
-    public_host_username: 
-    public_host: 
-    public_port: 4007
-    local_port: 3000
-    server_alive_interval: 0
+  cucumber:
+    api_key: YOUR API KEY
+    secret_key: YOUR SECRET KEY
+    canvas_page_name:
+    callback_url: 
+    set_asset_host_to_callback_url: true   
+    #......
 
 Help make these instructions better, submit your improvements via github.
