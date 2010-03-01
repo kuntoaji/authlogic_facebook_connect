@@ -125,28 +125,8 @@ The important parts are:
     :length => 'long', :autologoutlink => true, :v => 2 %>
 
 === Notes
-
-==== before_connect hook
-If you want to save some user data when connecting to facebook you can define the
-before_connect hook in your user model.  before_connect is called the first
-time a facebook user authenticates with your application.
-
-This hook is a good place to set values for authlogic required credentials or you can
-make credentials optional by allowing nulls in the database. See the authlogic
-example app migration for more on optional credential columns.
-
-The only credential column that is not optional is persistence token. You can
-ensure this is set in before_connect with reset_persistence_token.
-
-Here is an example implementation of the before_connect hook:
-
-  def before_connect(facebook_session)
-    self.name = facebook_session.user.name
-    # Set required credentials
-    reset_persistence_token
-  end
-  
-For more information about what you can get form the facebook_session checkout the Facebooker gem rdoc. 
+==== Example User Sessions Controller
+http://gist.github.com/318107
 
 ==== Testing with cucumber
 If you want to test with cucumber, you have to add cucumber environtment in the facebooker.yml. Example:
@@ -154,7 +134,7 @@ If you want to test with cucumber, you have to add cucumber environtment in the 
   development:
     api_key: YOUR API KEY
     secret_key: YOUR SECRET KEY
-    canvas_page_name: Bukalapak
+    canvas_page_name:
     callback_url:
     pretty_errors: true
     set_asset_host_to_callback_url: true
