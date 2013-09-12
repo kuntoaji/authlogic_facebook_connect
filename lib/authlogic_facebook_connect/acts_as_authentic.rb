@@ -6,10 +6,10 @@ module AuthlogicFacebookConnect
         add_acts_as_authentic_module(Methods, :prepend)
       end
     end
-    
+
     module Config
     end
-    
+
     module Methods
       def self.included(klass)
         klass.class_eval do
